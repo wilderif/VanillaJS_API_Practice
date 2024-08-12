@@ -1,14 +1,75 @@
 :root {
+  --primary-color: #eeeeee;
+  --point-color: #ffc2c2;
+  --heart-color: #ff0404;
+  font-size: 16px;
 }
 
+/* reset */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-header {
+body {
+  background-color: #ffffff;
+  font-family: sans-serif;
 }
 
+/* header */
+header .header-container {
+  border: solid 1px red;
+  background-color: var(--primary-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 6rem;
+}
+
+header .header-container #logo {
+  /* width: 4rem; */
+  height: 4rem;
+}
+
+header .header-container #logo img {
+  height: 100%;
+}
+
+header .header-container .search-container {
+  position: relative;
+  width: 50%;
+  height: 4rem;
+}
+
+header .header-container .search-container #search-bar {
+  width: 100%;
+  height: 100%;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  border: none;
+}
+
+header .header-container .search-container #search-btn {
+  position: absolute;
+  right: 1rem;
+  height: 4rem;
+  width: 4rem;
+  cursor: pointer;
+}
+
+header .header-container .like-btn {
+  height: 4rem;
+  width: 4rem;
+}
+
+/* main */
 main {
+  border: solid 1px blue;
+}
+
+main ul {
+  border: 1px solid orangered;
+  display: grid;
+  grid-template-rows: repeat(4);
 }
