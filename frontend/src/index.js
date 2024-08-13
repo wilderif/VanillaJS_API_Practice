@@ -1,5 +1,3 @@
-import init from "./init.js";
-
 // 초기 화면 최신 도서 목록
 // fetch 1번만 한 뒤에 반복해서 사용
 // 날짜 바뀌면 새로운 데이터로 갱신
@@ -15,6 +13,27 @@ import init from "./init.js";
 // api 오류 예외처리
 // jsDoc 주석 추가
 
-// const wishList = document.getElementById("wish-list");
+// 전체 로직 설명하는 DOC 잘 작성할 것
+
+// import init from "./init.js";
+
+import { fetchItemList } from "./api.js";
+import { saveToStorage } from "./storage.js";
+
+const wishList = document.getElementById("wish-list");
+const searchKeyword = document.getElementById("search-keyword");
+
+// 초기 화면 최신 도서 목록
+// 200개 fetch한 뒤에 localStorage에 8개씩 페이지 나누어 저장
+// 페이지 이동 시 localStorage에서 데이터 불러오기
+// localStorage에 data 없을 때 or 날짜 바뀔 때 초기화 한 뒤 다시 fetch
+// book data 개수 따라 pagination 변경
+const init = async () => {
+  const initBooks = await fetchItemList("ItemNewSpecial", 200, 1, "Book");
+  saveToStorage("ItemNewSpecial", initBooks);
+  searchKeyword.innerText = "주목할 만한 신간 리스트";
+};
+
+export default init;
 
 // init();
