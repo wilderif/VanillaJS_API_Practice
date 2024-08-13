@@ -1,0 +1,14 @@
+{
+  "name": "vanillajs_bookasearch",
+  "version": "1.0.0",
+  "main": "app.js",
+  "repository": "https://github.com/wilderif/VanillaJS_BookSearch",
+  "author": "wilderif <woojuro3@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "axios": "^1.7.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2"
+  }
+}
