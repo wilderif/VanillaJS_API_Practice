@@ -11,18 +11,23 @@ app.use(cors());
 app.get("/api/ItemSearch", async (req, res, next) => {
   console.log("in");
   try {
-    const { query, queryType, maxResults, start, searchTarget } = req.query;
-    const apiUrl = "https://www.aladin.co.kr/ttb/api/ItemSearch.aspx";
+    const { Query, QueryType, MaxResults, Start, SearchTarget } = req.query;
+    if (!Query || !QueryType || !MaxResults || !Start || !SearchTarget) {
+      return res
+        .status(400)
+        .json({ error: "Missing required query parameters" });
+    }
 
+    const apiUrl = "https://www.aladin.co.kr/ttb/api/ItemSearch.aspx";
     const response = await axios.get(apiUrl, {
       params: {
-        ttbkey: process.env.API_KEY,
-        Query: query || "aladdin",
-        QueryType: queryType || "Title",
-        MaxResults: maxResults || 8,
-        start: start || 1,
-        SearchTarget: searchTarget || "Book",
-        output: "js",
+        TTBKey: process.env.API_KEY,
+        Query: Query || "aladdin",
+        QueryType,
+        MaxResults,
+        Start,
+        SearchTarget,
+        Output: "js",
         Version: "20131101",
       },
     });
@@ -37,20 +42,24 @@ app.get("/api/ItemSearch", async (req, res, next) => {
 });
 
 app.get("/api/ItemList", async (req, res, next) => {
-  console.log("in");
-  console.log("req.query:", req.query);
   try {
-    const { queryType, maxResults, start, searchTarget } = req.query;
-    const apiUrl = "https://www.aladin.co.kr/ttb/api/ItemList.aspx";
+    // console.log(req.query);
+    const { QueryType, MaxResults, Start, SearchTarget } = req.query;
+    if (!QueryType || !MaxResults || !Start || !SearchTarget) {
+      return res
+        .status(400)
+        .json({ error: "Missing required query parameters" });
+    }
 
+    const apiUrl = "https://www.aladin.co.kr/ttb/api/ItemList.aspx";
     const response = await axios.get(apiUrl, {
       params: {
-        ttbkey: process.env.API_KEY,
-        QueryType: queryType || "ItemNewSpecial", // default: ItemNewSpecial : 주목할 만한 신간 리스트
-        MaxResults: maxResults || 8,
-        start: start || 1,
-        SearchTarget: searchTarget || "Book",
-        output: "js",
+        TTBKey: process.env.API_KEY,
+        QueryType, // default: ItemNewSpecial : 주목할 만한 신간 리스트
+        MaxResults,
+        Start,
+        SearchTarget,
+        Output: "js",
         Version: "20131101",
       },
     });
