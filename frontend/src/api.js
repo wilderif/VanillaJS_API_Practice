@@ -1,4 +1,4 @@
-const fetchItemSearch = async (
+export const fetchItemSearch = async (
   query = "",
   queryType = "Title",
   maxResults = 8,
@@ -6,6 +6,7 @@ const fetchItemSearch = async (
   searchTarget = "Book"
 ) => {
   try {
+    console.log("API call");
     const url = new URL("http://localhost:3000/api/ItemSearch");
     url.searchParams.append("Query", query);
     url.searchParams.append("QueryType", queryType);
@@ -28,13 +29,14 @@ const fetchItemSearch = async (
 };
 
 // 한 페이지에 최대 50개, 총 결과는 200개까지만 검색 가능
-const fetchItemList = async (
+export const fetchItemList = async (
   queryType = "ItemNewSpecial",
-  maxResults = 8,
+  maxResults = 200,
   start = 1,
   searchTarget = "Book"
 ) => {
   try {
+    console.log("API call");
     const url = new URL("http://localhost:3000/api/ItemList");
     url.searchParams.append("QueryType", queryType);
     url.searchParams.append("MaxResults", maxResults);
@@ -48,11 +50,9 @@ const fetchItemList = async (
     }
 
     const data = await response.json();
-    console.log("API 응답 데이터:", data.item);
+    return data.item;
   } catch (error) {
     console.error("API 요청 중 오류 발생:", error);
     // document.getElementById("result").innerText = "오류 발생: " + error.message;
   }
 };
-
-export { fetchItemSearch, fetchItemList };

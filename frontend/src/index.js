@@ -1,3 +1,5 @@
+import init from "./init.js";
+
 // 초기 화면 최신 도서 목록
 // fetch 1번만 한 뒤에 반복해서 사용
 // 날짜 바뀌면 새로운 데이터로 갱신
@@ -11,19 +13,8 @@
 // wishList 누르면 모달창으로 wishList 목록 확인 가능
 // 메인로고 클릭 시 초기 화면으로 이동
 // api 오류 예외처리
+// jsDoc 주석 추가
 
-import init from "./init.js";
+// const wishList = document.getElementById("wish-list");
 
-const wishList = document.getElementById("wish-list");
-
-// fetch("http://localhost:3000/api/search?query=aladdin")
-//   .then((response) => response.json())
-//   .then((data) => {
-//     console.log("API 응답 데이터:", data.item);
-//   })
-//   .catch((error) => {
-//     console.error("API 요청 중 오류 발생:", error);
-//     document.getElementById("result").innerText = "오류 발생: " + error.message;
-//   });
-
-// fetchItemList("ItemNewSpecial", 8, 4, "Book");
+// init();
