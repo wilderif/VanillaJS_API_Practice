@@ -30,36 +30,40 @@ const searchKeywordEl = document.getElementById("search-keyword-text");
 const searchBarEl = document.getElementById("search-bar");
 const searchBtnEl = document.getElementById("search-btn");
 
+// 기존 로컬 스토리지에 저장된 데이터 삭제 및 추가
 const handleSubmit = () => {
   const searchKeyword = searchBarEl.value.trim();
-  console.log(searchKeyword);
+  console.log("handleSubmit called", searchKeyword);
   // 예외 범위 alert 변경할 것
   if (!searchKeyword) {
     alert("검색어를 입력해주세요.");
     return;
   }
-  console.log("pass");
 
   searchKeywordEl.innerText = searchKeyword;
 
   searchBarEl.value = "";
-  // searchBook(searchKeyword);
+  // fetchItemSearch(searchKeyword, "Title", 100, 1, "Book");
 };
 
+// 검색 두번 되는 버그 수정
 searchBarEl.addEventListener("keydown", (event) => {
-  if (event.key !== "Enter") {
-    return;
+  if (event.key === "Enter" && event.isComposing === false) {
+    handleSubmit();
   }
-  handleSubmit();
 });
 
-searchBtnEl.addEventListener("click", handleSubmit);
+searchBtnEl.addEventListener("click", (event) => {
+  handleSubmit();
+});
 
 // 초기 화면 최신 도서 목록
 // 200개 fetch한 뒤에 localStorage에 8개씩 페이지 나누어 저장
 // 페이지 이동 시 localStorage에서 데이터 불러오기
 // localStorage에 data 없을 때 or 날짜 바뀔 때 초기화 한 뒤 다시 fetch
 // book data 개수 따라 pagination 변경
+
+// 로컬 스토리지에 좋아요 컨테이너 추가할 것
 const init = async () => {
   const initBooks = await fetchItemList("ItemNewSpecial", 200, 1, "Book");
   saveToStorage("ItemNewSpecial", initBooks);
