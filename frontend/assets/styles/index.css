@@ -170,7 +170,7 @@ main ul li {
   width: 100%;
   padding: 1rem;
   background-color: #a7a7a7;
-  /* color: white; */
+  color: white;
   /* display: flex; */
   /* align-items: center; */
   /* justify-content: center; */
@@ -256,6 +256,7 @@ footer .pagination {
 }
 
 .page-numbers {
+  margin: 0 1rem;
   display: flex;
   gap: 0.5rem;
 }
@@ -266,7 +267,7 @@ footer .pagination {
   padding: 10px 15px;
 }
 
-.page-numbers .active {
+.page-numbers .current-page {
   background-color: var(--color-point);
   border-radius: 5px;
   color: white;

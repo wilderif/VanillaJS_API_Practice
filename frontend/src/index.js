@@ -36,7 +36,9 @@ const pageNumbersEl = document.getElementById("page-numbers");
 
 let currentPage = 1;
 let currentTotalResults;
+let currentTotalPages;
 let currentPageData;
+let searchKeyword = "";
 
 // 모달에 있는지 구분해서 구현
 const displayBookList = () => {
@@ -47,8 +49,71 @@ const displayBookList = () => {
   });
 };
 
+export const handlePagination = async (targetPage) => {
+  searchBarEl.value = "";
+  [currentTotalResults, currentPageData] = await fetchItemSearch(
+    searchKeyword,
+    "Title",
+    targetPage,
+    8,
+    "Book"
+  );
+
+  currentPage = targetPage;
+
+  displayBookList();
+  displayPagination(targetPage, currentTotalPages);
+};
+
+const displayPagination = (curPage, totalPages) => {
+  pageNumbersEl.innerHTML = "";
+  if (curPage > 1) {
+    pagePrevBtnEl.addEventListener("click", () => {});
+  } else {
+    pagePrevBtnEl.removeEventListener("click", () => {});
+    pagePrevBtnEl.style.cursor = "not-allowed";
+    pagePrevBtnEl.style.opacity = "0.7";
+  }
+
+  if (curPage < totalPages) {
+    pageNextBtnEl.addEventListener("click", () => {});
+  } else {
+    pageNextBtnEl.removeEventListener("click", () => {});
+    pageNextBtnEl.style.cursor = "not-allowed";
+    pageNextBtnEl.style.opacity = "0.7";
+  }
+
+  for (let i = 1; i <= 2; i++) {
+    renderPagination(curPage, i);
+  }
+
+  if (4 < curPage && curPage < totalPages - 2) {
+    const dotEl = document.createElement("span");
+    dotEl.innerText = "...";
+    dotEl.classList.add("page-number");
+    pageNumbersEl.appendChild(dotEl);
+  }
+
+  for (
+    let i = Math.max(3, curPage - 1);
+    i <= Math.min(totalPages - 2, curPage + 1);
+    i++
+  ) {
+    renderPagination(curPage, i);
+  }
+
+  const dotEl = document.createElement("span");
+  dotEl.innerText = "...";
+  dotEl.classList.add("page-number");
+  pageNumbersEl.appendChild(dotEl);
+
+  for (let i = totalPages - 1; i <= totalPages; i++) {
+    renderPagination(curPage, i);
+  }
+};
+
 const handleSubmit = async () => {
-  const searchKeyword = searchBarEl.value.trim();
+  searchKeyword = searchBarEl.value.trim();
   console.log("handleSubmit called", searchKeyword);
   // 예외 범위 alert 변경할 것
   if (!searchKeyword) {
@@ -66,8 +131,9 @@ const handleSubmit = async () => {
     8,
     "Book"
   );
+  currentTotalPages = Math.ceil(currentTotalResults / 8);
   displayBookList();
-  // console.log(currentTotalResults, currentPageData);
+  displayPagination(1, currentTotalPages);
 };
 
 searchBarEl.addEventListener("keydown", (event) => {
@@ -80,11 +146,8 @@ searchBtnEl.addEventListener("click", (event) => {
   handleSubmit();
 });
 
-// 초기 화면 최신 도서 목록
-// 200개 fetch한 뒤에 localStorage에 8개씩 페이지 나누어 저장
-// 페이지 이동 시 localStorage에서 데이터 불러오기
-// localStorage에 data 없을 때 or 날짜 바뀔 때 초기화 한 뒤 다시 fetch
-// book data 개수 따라 pagination 변경
+pagePrevBtnEl.addEventListener("click", () => {});
+pageNextBtnEl.addEventListener("click", () => {});
 
 // 로컬 스토리지에 좋아요 컨테이너 추가할 것
 const init = async () => {
@@ -95,7 +158,9 @@ const init = async () => {
     "Book"
   );
   searchKeywordEl.innerText = "주목할 만한 신간 리스트";
+  currentTotalPages = Math.ceil(currentTotalResults / 8);
   displayBookList();
+  displayPagination(1, currentTotalPages);
 };
 
 // init();
