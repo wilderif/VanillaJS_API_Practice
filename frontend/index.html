@@ -20,9 +20,16 @@
             id="search-bar"
             placeholder="검색어를 입력해주세요"
           />
-          <button id="search-btn">돋보기</button>
+          <button id="search-btn">
+            <img
+              src="./assets/images/icons/search_button.png"
+              alt="Search Button"
+            />
+          </button>
         </div>
-        <button id="wish-list" class="like-btn">하트</button>
+        <button id="wish-list" class="like-btn">
+          <img src="./assets/images/icons/myLike_button.png" alt="My Like" />
+        </button>
       </div>
     </header>
     <main>
@@ -44,7 +51,12 @@
                   <p class="book-price">가격</p>
                   <p class="book-publisher">출판사</p>
                 </div>
-                <button class="like-btn">하트</button>
+                <button class="like-btn">
+                  <img
+                    src="./assets/images/icons/like_button.png"
+                    alt="Like Button"
+                  />
+                </button>
               </div>
             </div>
           </li>
@@ -61,7 +73,12 @@
                   <p class="book-price">가격</p>
                   <p class="book-publisher">출판사</p>
                 </div>
-                <button class="like-btn">하트</button>
+                <button class="like-btn">
+                  <img
+                    src="./assets/images/icons/like_button_filled.png"
+                    alt="Unlike Button"
+                  />
+                </button>
               </div>
             </div>
           </li>
@@ -138,11 +155,19 @@
     </main>
     <footer>
       <div class="pagination">
-        <button class="page-btn">1</button>
-        <button class="page-btn">2</button>
-        <button class="page-btn">3</button>
-        <button class="page-btn">4</button>
-        <button class="page-btn">5</button>
+        <button id="page-prev-btn" class="page-nav-btn" disabled>
+          <img
+            src="./assets/images/icons/pagination_left_button.png"
+            alt="pagination left button"
+          />
+        </button>
+        <div id="page-numbers" class="page-numbers"></div>
+        <button id="page-next-btn" class="page-nav-btn">
+          <img
+            src="./assets/images/icons/pagination_right_button.png"
+            alt="pagination right button"
+          />
+        </button>
       </div>
     </footer>
   </body>

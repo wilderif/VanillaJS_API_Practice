@@ -30,6 +30,14 @@ const searchKeywordEl = document.getElementById("search-keyword-text");
 const searchBarEl = document.getElementById("search-bar");
 const searchBtnEl = document.getElementById("search-btn");
 
+const pagePrevBtnEl = document.getElementById("page-prev-btn");
+const pageNextBtnEl = document.getElementById("page-next-btn");
+const pageNumbersEl = document.getElementById("page-numbers");
+
+let currentPage = 1;
+let currentTotalResults;
+let currentPageData;
+
 // 기존 로컬 스토리지에 저장된 데이터 삭제 및 추가
 const handleSubmit = async () => {
   const searchKeyword = searchBarEl.value.trim();
@@ -43,7 +51,13 @@ const handleSubmit = async () => {
   searchKeywordEl.innerText = searchKeyword;
 
   searchBarEl.value = "";
-  await fetchItemSearch(searchKeyword, "Title", 1, 8, "Book");
+  [currentTotalResults, currentPageData] = await fetchItemSearch(
+    searchKeyword,
+    "Title",
+    1,
+    8,
+    "Book"
+  );
 };
 
 // 검색 두번 되는 버그 수정
@@ -65,7 +79,12 @@ searchBtnEl.addEventListener("click", (event) => {
 
 // 로컬 스토리지에 좋아요 컨테이너 추가할 것
 const init = async () => {
-  const initBooks = await fetchItemList("ItemNewSpecial", 1, 8, "Book");
+  [currentTotalResults, currentPageData] = await fetchItemList(
+    "ItemNewSpecial",
+    1,
+    8,
+    "Book"
+  );
   searchKeywordEl.innerText = "주목할 만한 신간 리스트";
 };
 
