@@ -34,9 +34,9 @@ export const renderBook = (bookData) => {
   return liElement;
 };
 
-export const renderPagination = (curPage, pageNum) => {
-  const pageNumbersEl = document.getElementById("page-numbers");
+const pageNumbersEl = document.getElementById("page-numbers");
 
+export const renderPaginationNum = (curPage, pageNum) => {
   const pageEl = document.createElement("button");
   pageEl.innerText = pageNum;
   pageEl.classList.add("page-number");
@@ -45,4 +45,11 @@ export const renderPagination = (curPage, pageNum) => {
   }
   pageEl.addEventListener("click", () => handlePagination(pageNum));
   pageNumbersEl.appendChild(pageEl);
+};
+
+export const renderPaginationDots = () => {
+  const dotEl = document.createElement("span");
+  dotEl.innerText = "...";
+  dotEl.classList.add("page-number");
+  pageNumbersEl.appendChild(dotEl);
 };

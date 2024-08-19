@@ -22,7 +22,11 @@
 
 import { fetchItemList, fetchItemSearch } from "./api.js";
 import { saveToStorage } from "./storage.js";
-import { renderBook, renderPagination } from "./render.js";
+import {
+  renderBook,
+  renderPaginationNum,
+  renderPaginationDots,
+} from "./render.js";
 
 const wishListEl = document.getElementById("wish-list");
 const searchKeywordEl = document.getElementById("search-keyword-text");
@@ -84,14 +88,11 @@ const displayPagination = (curPage, totalPages) => {
   }
 
   for (let i = 1; i <= 2; i++) {
-    renderPagination(curPage, i);
+    renderPaginationNum(curPage, i);
   }
 
-  if (4 < curPage && curPage < totalPages - 2) {
-    const dotEl = document.createElement("span");
-    dotEl.innerText = "...";
-    dotEl.classList.add("page-number");
-    pageNumbersEl.appendChild(dotEl);
+  if (4 < curPage) {
+    renderPaginationDots();
   }
 
   for (
@@ -99,16 +100,15 @@ const displayPagination = (curPage, totalPages) => {
     i <= Math.min(totalPages - 2, curPage + 1);
     i++
   ) {
-    renderPagination(curPage, i);
+    renderPaginationNum(curPage, i);
   }
 
-  const dotEl = document.createElement("span");
-  dotEl.innerText = "...";
-  dotEl.classList.add("page-number");
-  pageNumbersEl.appendChild(dotEl);
+  if (curPage < totalPages - 3) {
+    renderPaginationDots();
+  }
 
   for (let i = totalPages - 1; i <= totalPages; i++) {
-    renderPagination(curPage, i);
+    renderPaginationNum(curPage, i);
   }
 };
 
