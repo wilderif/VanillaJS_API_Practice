@@ -26,7 +26,7 @@ export const renderBook = (bookData) => {
       </div>
     </div>
   `;
-  console.log("liElement", liElement);
+
   return liElement;
 };
 
