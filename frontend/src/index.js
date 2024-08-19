@@ -58,6 +58,7 @@ const handleSubmit = async () => {
     8,
     "Book"
   );
+  // console.log(currentTotalResults, currentPageData);
 };
 
 // 검색 두번 되는 버그 수정
