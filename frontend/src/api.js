@@ -1,8 +1,10 @@
+// data.totalResults 활용할 것
+
 export const fetchItemSearch = async (
   query = "",
   queryType = "Title",
-  maxResults = 8,
   start = 1,
+  maxResults = 8,
   searchTarget = "Book"
 ) => {
   try {
@@ -10,8 +12,8 @@ export const fetchItemSearch = async (
     const url = new URL("http://localhost:3000/api/ItemSearch");
     url.searchParams.append("Query", query);
     url.searchParams.append("QueryType", queryType);
-    url.searchParams.append("MaxResults", maxResults);
     url.searchParams.append("Start", start);
+    url.searchParams.append("MaxResults", maxResults);
     url.searchParams.append("SearchTarget", searchTarget);
 
     const response = await fetch(url.href);
@@ -21,17 +23,19 @@ export const fetchItemSearch = async (
     }
 
     const data = await response.json();
+    console.log(data);
     console.log("API 응답 데이터:", data.item);
+
+    return data.totalResults;
   } catch (error) {
     console.error("API 요청 중 오류 발생:", error);
     // document.getElementById("result").innerText = "오류 발생: " + error.message;
   }
 };
 
-// 한 페이지에 최대 50개, 총 결과는 200개까지만 검색 가능
 export const fetchItemList = async (
   queryType = "ItemNewSpecial",
-  maxResults = 200,
+  maxResults = 8,
   start = 1,
   searchTarget = "Book"
 ) => {
@@ -39,8 +43,8 @@ export const fetchItemList = async (
     console.log("API call");
     const url = new URL("http://localhost:3000/api/ItemList");
     url.searchParams.append("QueryType", queryType);
-    url.searchParams.append("MaxResults", maxResults);
     url.searchParams.append("Start", start);
+    url.searchParams.append("MaxResults", maxResults);
     url.searchParams.append("SearchTarget", searchTarget);
 
     const response = await fetch(url.href);
@@ -50,7 +54,8 @@ export const fetchItemList = async (
     }
 
     const data = await response.json();
-    return data.item;
+
+    return data.totalResults;
   } catch (error) {
     console.error("API 요청 중 오류 발생:", error);
     // document.getElementById("result").innerText = "오류 발생: " + error.message;

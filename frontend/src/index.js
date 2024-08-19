@@ -31,7 +31,7 @@ const searchBarEl = document.getElementById("search-bar");
 const searchBtnEl = document.getElementById("search-btn");
 
 // 기존 로컬 스토리지에 저장된 데이터 삭제 및 추가
-const handleSubmit = () => {
+const handleSubmit = async () => {
   const searchKeyword = searchBarEl.value.trim();
   console.log("handleSubmit called", searchKeyword);
   // 예외 범위 alert 변경할 것
@@ -43,7 +43,7 @@ const handleSubmit = () => {
   searchKeywordEl.innerText = searchKeyword;
 
   searchBarEl.value = "";
-  // fetchItemSearch(searchKeyword, "Title", 100, 1, "Book");
+  await fetchItemSearch(searchKeyword, "Title", 1, 8, "Book");
 };
 
 // 검색 두번 되는 버그 수정
@@ -65,8 +65,7 @@ searchBtnEl.addEventListener("click", (event) => {
 
 // 로컬 스토리지에 좋아요 컨테이너 추가할 것
 const init = async () => {
-  const initBooks = await fetchItemList("ItemNewSpecial", 200, 1, "Book");
-  saveToStorage("ItemNewSpecial", initBooks);
+  const initBooks = await fetchItemList("ItemNewSpecial", 1, 8, "Book");
   searchKeywordEl.innerText = "주목할 만한 신간 리스트";
 };
 

@@ -12,7 +12,7 @@ app.get("/api/ItemSearch", async (req, res, next) => {
   console.log("in");
   try {
     const { Query, QueryType, MaxResults, Start, SearchTarget } = req.query;
-    if (!Query || !QueryType || !MaxResults || !Start || !SearchTarget) {
+    if (!Query || !QueryType || !Start || !MaxResults || !SearchTarget) {
       return res
         .status(400)
         .json({ error: "Missing required query parameters" });
@@ -24,8 +24,8 @@ app.get("/api/ItemSearch", async (req, res, next) => {
         TTBKey: process.env.API_KEY,
         Query: Query || "aladdin",
         QueryType,
-        MaxResults,
         Start,
+        MaxResults,
         SearchTarget,
         Cover: "Big",
         Output: "js",
@@ -46,7 +46,7 @@ app.get("/api/ItemList", async (req, res, next) => {
   try {
     // console.log(req.query);
     const { QueryType, MaxResults, Start, SearchTarget } = req.query;
-    if (!QueryType || !MaxResults || !Start || !SearchTarget) {
+    if (!QueryType || !Start || !MaxResults || !SearchTarget) {
       return res
         .status(400)
         .json({ error: "Missing required query parameters" });
@@ -57,8 +57,8 @@ app.get("/api/ItemList", async (req, res, next) => {
       params: {
         TTBKey: process.env.API_KEY,
         QueryType, // default: ItemNewSpecial : 주목할 만한 신간 리스트
-        MaxResults,
         Start,
+        MaxResults,
         SearchTarget,
         Cover: "Big",
         Output: "js",
