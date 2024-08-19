@@ -23,10 +23,10 @@ export const fetchItemSearch = async (
     }
 
     const data = await response.json();
-    console.log(data);
-    console.log("API 응답 데이터:", data.item);
 
-    return [data.totalResults, data.item];
+    let totalResults = data.totalResults <= 200 ? data.totalResults : 200;
+
+    return [totalResults, data.item];
   } catch (error) {
     console.error("API 요청 중 오류 발생:", error);
     // document.getElementById("result").innerText = "오류 발생: " + error.message;
@@ -35,8 +35,8 @@ export const fetchItemSearch = async (
 
 export const fetchItemList = async (
   queryType = "ItemNewSpecial",
-  maxResults = 8,
   start = 1,
+  maxResults = 8,
   searchTarget = "Book"
 ) => {
   try {
@@ -55,7 +55,9 @@ export const fetchItemList = async (
 
     const data = await response.json();
 
-    return [data.totalResults, data.item];
+    let totalResults = data.totalResults <= 200 ? data.totalResults : 200;
+
+    return [totalResults, data.item];
   } catch (error) {
     console.error("API 요청 중 오류 발생:", error);
     // document.getElementById("result").innerText = "오류 발생: " + error.message;

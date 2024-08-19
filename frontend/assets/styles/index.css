@@ -10,7 +10,7 @@
   --font-medium: 1rem;
   --font-large: 1.1rem;
 
-  --shadow-small: 0 2px 5px rgba(0, 0, 0, 0.15);
+  --shadow-small: 0 3px 5px rgba(0, 0, 0, 0.15);
   --shadow-medium: 0 5px 10px rgba(0, 0, 0, 0.15);
   /* --shadow-large: 0 5px 20px rgba(0, 0, 0, 0.15); */
 
@@ -151,6 +151,7 @@ main ul li {
   max-height: 250px; */
   overflow: hidden;
   height: 300px;
+  box-shadow: var(--shadow-small);
 }
 
 .book-container .book-cover {

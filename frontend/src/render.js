@@ -1,6 +1,6 @@
 // storage에서 가져와서 parse한 뒤 render
 
-import { handlePagination } from "./index.js";
+import { handlePagination, curSearchType } from "./index.js";
 
 export const renderBook = (bookData) => {
   const liElement = document.createElement("li");

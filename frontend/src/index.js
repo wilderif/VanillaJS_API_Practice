@@ -38,6 +38,11 @@ const pagePrevBtnEl = document.getElementById("page-prev-btn");
 const pageNextBtnEl = document.getElementById("page-next-btn");
 const pageNumbersEl = document.getElementById("page-numbers");
 
+// -1: fetchItemList
+// 0:fetchItemSearch(search keyword 사용한 검색)
+// 1: wish list 검색
+export let curSearchType = -1;
+
 let currentPage = 1;
 let currentTotalResults;
 let currentTotalPages;
@@ -54,14 +59,30 @@ const displayBookList = () => {
 };
 
 export const handlePagination = async (targetPage) => {
-  searchBarEl.value = "";
-  [currentTotalResults, currentPageData] = await fetchItemSearch(
-    searchKeyword,
-    "Title",
+  console.log(
+    "curSearchType",
+    curSearchType,
     targetPage,
-    8,
-    "Book"
+    currentTotalResults,
+    currentTotalPages
   );
+  if (curSearchType === -1) {
+    [currentTotalResults, currentPageData] = await fetchItemList(
+      "ItemNewSpecial",
+      targetPage,
+      8,
+      "Book"
+    );
+  } else if (curSearchType === 0) {
+    [currentTotalResults, currentPageData] = await fetchItemSearch(
+      searchKeyword,
+      "Title",
+      targetPage,
+      8,
+      "Book"
+    );
+  } else if (curSearchType === 1) {
+  }
 
   currentPage = targetPage;
 
@@ -119,13 +140,14 @@ const displayPagination = (curPage, totalPages) => {
 
 const handleSubmit = async () => {
   searchKeyword = searchBarEl.value.trim();
-  console.log("handleSubmit called", searchKeyword);
+
   // 예외 범위 alert 변경할 것
   if (!searchKeyword) {
     alert("검색어를 입력해주세요.");
     return;
   }
 
+  curSearchType = 0;
   searchKeywordEl.innerText = searchKeyword;
 
   searchBarEl.value = "";
@@ -151,7 +173,6 @@ searchBtnEl.addEventListener("click", (event) => {
   handleSubmit();
 });
 
-// 로컬 스토리지에 좋아요 컨테이너 추가할 것
 const init = async () => {
   [currentTotalResults, currentPageData] = await fetchItemList(
     "ItemNewSpecial",
@@ -161,6 +182,7 @@ const init = async () => {
   );
   searchKeywordEl.innerText = "주목할 만한 신간 리스트";
   currentTotalPages = Math.ceil(currentTotalResults / 8);
+  curSearchType = -1;
   displayBookList();
   displayPagination(1, currentTotalPages);
 };
