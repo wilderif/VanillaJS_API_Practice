@@ -1,3 +1,5 @@
+/* 미디어쿼리 적용할 것 */
+
 :root {
   --primary-color: #eeeeee;
   --point-color: #ffc2c2;
@@ -66,7 +68,7 @@ header .header-container .like-btn {
 
 /* main */
 
-main #search-keyword-line {
+main #search-keyword {
   margin-top: 3rem;
   margin-left: var(--side-margin);
 }

@@ -12,16 +12,48 @@
 // 메인로고 클릭 시 초기 화면으로 이동
 // api 오류 예외처리
 // jsDoc 주석 추가
+// 검색어 없을 때 예외처리
+
+// localStorage의 index에 따라 pagination 생성
 
 // 전체 로직 설명하는 DOC 잘 작성할 것
 
 // import init from "./init.js";
 
-import { fetchItemList } from "./api.js";
+import { fetchItemList, fetchItemSearch } from "./api.js";
 import { saveToStorage } from "./storage.js";
+import { renderBookList, renderPagination } from "./render.js";
 
-const wishList = document.getElementById("wish-list");
-const searchKeyword = document.getElementById("search-keyword");
+const wishListEl = document.getElementById("wish-list");
+const searchKeywordEl = document.getElementById("search-keyword-text");
+
+const searchBarEl = document.getElementById("search-bar");
+const searchBtnEl = document.getElementById("search-btn");
+
+const handleSubmit = () => {
+  const searchKeyword = searchBarEl.value.trim();
+  console.log(searchKeyword);
+  // 예외 범위 alert 변경할 것
+  if (!searchKeyword) {
+    alert("검색어를 입력해주세요.");
+    return;
+  }
+  console.log("pass");
+
+  searchKeywordEl.innerText = searchKeyword;
+
+  searchBarEl.value = "";
+  // searchBook(searchKeyword);
+};
+
+searchBarEl.addEventListener("keydown", (event) => {
+  if (event.key !== "Enter") {
+    return;
+  }
+  handleSubmit();
+});
+
+searchBtnEl.addEventListener("click", handleSubmit);
 
 // 초기 화면 최신 도서 목록
 // 200개 fetch한 뒤에 localStorage에 8개씩 페이지 나누어 저장
@@ -31,9 +63,7 @@ const searchKeyword = document.getElementById("search-keyword");
 const init = async () => {
   const initBooks = await fetchItemList("ItemNewSpecial", 200, 1, "Book");
   saveToStorage("ItemNewSpecial", initBooks);
-  searchKeyword.innerText = "주목할 만한 신간 리스트";
+  searchKeywordEl.innerText = "주목할 만한 신간 리스트";
 };
-
-export default init;
 
 // init();
