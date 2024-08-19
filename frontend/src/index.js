@@ -22,7 +22,7 @@
 
 import { fetchItemList, fetchItemSearch } from "./api.js";
 import { saveToStorage } from "./storage.js";
-import { renderBookList, renderPagination } from "./render.js";
+import { renderBook, renderPagination } from "./render.js";
 
 const wishListEl = document.getElementById("wish-list");
 const searchKeywordEl = document.getElementById("search-keyword-text");
@@ -38,7 +38,15 @@ let currentPage = 1;
 let currentTotalResults;
 let currentPageData;
 
-// 기존 로컬 스토리지에 저장된 데이터 삭제 및 추가
+// 모달에 있는지 구분해서 구현
+const displayBookList = () => {
+  const bookListEl = document.querySelector(".list-container ul");
+  bookListEl.innerHTML = "";
+  currentPageData.forEach((bookData) => {
+    bookListEl.appendChild(renderBook(bookData));
+  });
+};
+
 const handleSubmit = async () => {
   const searchKeyword = searchBarEl.value.trim();
   console.log("handleSubmit called", searchKeyword);
@@ -58,10 +66,10 @@ const handleSubmit = async () => {
     8,
     "Book"
   );
+  displayBookList();
   // console.log(currentTotalResults, currentPageData);
 };
 
-// 검색 두번 되는 버그 수정
 searchBarEl.addEventListener("keydown", (event) => {
   if (event.key === "Enter" && event.isComposing === false) {
     handleSubmit();
@@ -87,6 +95,7 @@ const init = async () => {
     "Book"
   );
   searchKeywordEl.innerText = "주목할 만한 신간 리스트";
+  displayBookList();
 };
 
 // init();
