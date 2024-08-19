@@ -2,14 +2,24 @@
 /* shadow 적용할 것 헤더, 서치바*/
 
 :root {
-  --primary-color: #eeeeee;
-  --point-color: #ffc2c2;
-  --heart-color: #ff0404;
+  --color-primary: #eeeeee;
+  --color-point: #ffc2c2;
+
+  --font-extra-small: 0.7rem;
+  --font-small: 0.85rem;
+  --font-medium: 1rem;
+  --font-large: 1.15rem;
+
+  --shadow-small: 0 2px 5px rgba(0, 0, 0, 0.15);
+  --shadow-medium: 0 5px 10px rgba(0, 0, 0, 0.15);
+  /* --shadow-large: 0 5px 20px rgba(0, 0, 0, 0.15); */
+
   --side-margin: 8rem;
+
   font-size: 16px;
 }
 
-/* reset */
+/* init */
 * {
   margin: 0;
   padding: 0;
@@ -40,11 +50,12 @@ button {
 
 /* header */
 header .header-container {
-  background-color: var(--primary-color);
+  background-color: var(--color-primary);
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 1.5rem var(--side-margin);
+  box-shadow: var(--shadow-medium);
 }
 
 header .header-container #logo {
@@ -60,6 +71,7 @@ header .header-container .search-container {
   position: relative;
   width: 50%;
   height: 3rem;
+  box-shadow: var(--shadow-small);
 }
 
 header .header-container .search-container #search-bar {
@@ -99,7 +111,6 @@ main #search-keyword {
 }
 
 main .list-container {
-  border: 1px solid green;
   /* display: flex;
   justify-content: center;
   align-items: center; */
@@ -107,7 +118,7 @@ main .list-container {
 }
 
 main ul {
-  border: 1px solid orangered;
+  /* border: 1px solid orangered; */
   width: 100%;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -138,6 +149,8 @@ main ul {
 .book-container .book-cover {
   /* height: 100%; */
   width: 100%;
+  max-height: 15rem;
+  object-fit: cover;
   /* border-radius: 1rem; */
 }
 
@@ -145,18 +158,23 @@ main ul {
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
   height: 100%;
-  background-color: #a7a7a7; /* 투명한 검정 배경 */
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
+  width: 100%;
+  padding: 0 0.5rem;
+  background-color: #a7a7a7;
+  /* color: white; */
+  /* display: flex; */
+  /* align-items: center; */
+  /* justify-content: center; */
+  /* text-align: center; */
   opacity: 0;
   transition: opacity 0.3s ease;
 
-  font-size: 14px;
+  font-size: var(--font-extra-small);
+  line-height: var(--font-extra-medium);
+  overflow: hidden;
+  /* overflow 처리 다시 고민해볼 것 */
+  text-overflow: ellipsis;
 }
 
 .book-container-cover:hover .book-cover {
@@ -179,15 +197,16 @@ main ul {
 
 .book-container .book-name {
   margin-top: 1rem;
-  font-size: 14px;
+  font-size: var(--font-small);
 }
 
 .book-container .book-price {
-  font-weight: bold;
+  font-size: var(--font-medium);
+  font-weight: 500;
 }
 
 .book-container .book-publisher {
-  font-size: 12px;
+  font-size: var(--font-extra-small);
 }
 
 .book-container .like-btn {
@@ -211,7 +230,6 @@ footer .pagination {
 .page-nav-btn {
   background-color: transparent;
   border: none;
-  font-size: 1.5rem;
   margin: 0 5px;
 }
 
@@ -224,11 +242,10 @@ footer .pagination {
   background-color: transparent;
   border: none;
   padding: 10px 15px;
-  font-size: 1rem;
 }
 
 .page-numbers .active {
-  background-color: #ffc2c2;
+  background-color: var(--color-point);
   border-radius: 5px;
   color: white;
 }

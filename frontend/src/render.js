@@ -17,7 +17,7 @@ export const renderBook = (bookData) => {
       <div class="book-container-footer">
         <div class="book-info">
           <p class="book-name">${bookData.title}</p>
-          <p class="book-price">${bookData.price}</p>
+          <p class="book-price">${bookData.priceStandard} 원</p>
           <p class="book-publisher">${bookData.publisher}</p>
         </div>
         <button class="like-btn">
