@@ -66,25 +66,30 @@ export const handlePagination = async (targetPage) => {
   currentPage = targetPage;
 
   displayBookList();
-  displayPagination(targetPage, currentTotalPages);
+  displayPagination(currentPage, currentTotalPages);
 };
 
 const displayPagination = (curPage, totalPages) => {
   pageNumbersEl.innerHTML = "";
+
   if (curPage > 1) {
-    pagePrevBtnEl.addEventListener("click", () => {});
+    pagePrevBtnEl.style.cursor = "pointer";
+    pagePrevBtnEl.style.opacity = "1";
+    pagePrevBtnEl.onclick = () => handlePagination(curPage - 1);
   } else {
-    pagePrevBtnEl.removeEventListener("click", () => {});
     pagePrevBtnEl.style.cursor = "not-allowed";
-    pagePrevBtnEl.style.opacity = "0.7";
+    pagePrevBtnEl.style.opacity = "0.5";
+    pagePrevBtnEl.onclick = null;
   }
 
   if (curPage < totalPages) {
-    pageNextBtnEl.addEventListener("click", () => {});
+    pageNextBtnEl.style.cursor = "pointer";
+    pageNextBtnEl.style.opacity = "1";
+    pageNextBtnEl.onclick = () => handlePagination(curPage + 1);
   } else {
-    pageNextBtnEl.removeEventListener("click", () => {});
     pageNextBtnEl.style.cursor = "not-allowed";
-    pageNextBtnEl.style.opacity = "0.7";
+    pageNextBtnEl.style.opacity = "0.5";
+    pageNextBtnEl.onclick = null;
   }
 
   for (let i = 1; i <= 2; i++) {
@@ -145,9 +150,6 @@ searchBarEl.addEventListener("keydown", (event) => {
 searchBtnEl.addEventListener("click", (event) => {
   handleSubmit();
 });
-
-pagePrevBtnEl.addEventListener("click", () => {});
-pageNextBtnEl.addEventListener("click", () => {});
 
 // 로컬 스토리지에 좋아요 컨테이너 추가할 것
 const init = async () => {
