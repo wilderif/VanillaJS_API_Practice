@@ -93,6 +93,7 @@ export const handlePagination = async (targetPage) => {
 const displayPagination = (curPage, totalPages) => {
   pageNumbersEl.innerHTML = "";
 
+  // prev button
   if (curPage > 1) {
     pagePrevBtnEl.style.cursor = "pointer";
     pagePrevBtnEl.style.opacity = "1";
@@ -103,6 +104,7 @@ const displayPagination = (curPage, totalPages) => {
     pagePrevBtnEl.onclick = null;
   }
 
+  // next button
   if (curPage < totalPages) {
     pageNextBtnEl.style.cursor = "pointer";
     pageNextBtnEl.style.opacity = "1";
@@ -113,28 +115,35 @@ const displayPagination = (curPage, totalPages) => {
     pageNextBtnEl.onclick = null;
   }
 
-  for (let i = 1; i <= 2; i++) {
-    renderPaginationNum(curPage, i);
-  }
+  if (totalPages <= 5) {
+    // 총 페이지 수가 5 이하일 때 모든 페이지 번호를 표시
+    for (let i = 1; i <= totalPages; i++) {
+      renderPaginationNum(curPage, i);
+    }
+  } else {
+    for (let i = 1; i <= 2; i++) {
+      renderPaginationNum(curPage, i);
+    }
 
-  if (4 < curPage) {
-    renderPaginationDots();
-  }
+    if (4 < curPage) {
+      renderPaginationDots();
+    }
 
-  for (
-    let i = Math.max(3, curPage - 1);
-    i <= Math.min(totalPages - 2, curPage + 1);
-    i++
-  ) {
-    renderPaginationNum(curPage, i);
-  }
+    for (
+      let i = Math.max(3, curPage - 1);
+      i <= Math.min(totalPages - 2, curPage + 1);
+      i++
+    ) {
+      renderPaginationNum(curPage, i);
+    }
 
-  if (curPage < totalPages - 3) {
-    renderPaginationDots();
-  }
+    if (curPage < totalPages - 3) {
+      renderPaginationDots();
+    }
 
-  for (let i = totalPages - 1; i <= totalPages; i++) {
-    renderPaginationNum(curPage, i);
+    for (let i = totalPages - 1; i <= totalPages; i++) {
+      renderPaginationNum(curPage, i);
+    }
   }
 };
 
