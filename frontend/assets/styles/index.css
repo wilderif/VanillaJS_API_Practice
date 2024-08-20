@@ -19,11 +19,14 @@
   font-size: 16px;
 }
 
-/* init */
+/* reset & init */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+ul {
   list-style: none;
 }
 
@@ -34,12 +37,10 @@ body {
 
 button {
   background: none;
-  background: none;
   border: none;
   padding: 0;
   margin: 0;
   box-shadow: none;
-
   cursor: pointer;
 }
 
@@ -50,7 +51,6 @@ button {
 
 /* modal */
 #wish-list-modal-container {
-  /* display: none; */
   position: fixed;
   top: 0;
   left: 0;
@@ -58,11 +58,9 @@ button {
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 100;
-
   display: flex;
   justify-content: center;
   align-items: center;
-
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.3s ease, visibility 0.3s ease;
@@ -75,14 +73,13 @@ button {
 
 #wish-list-modal-content {
   position: relative;
-  background-color: var(--color-primary);
-  height: calc(100vh - 13rem);
   width: calc(100% - 2 * var(--side-margin));
+  height: calc(100vh - 13rem);
+  padding: 5.5rem 0;
+  background-color: var(--color-primary);
   border-radius: 1rem;
   box-shadow: var(--shadow-large);
   overflow-y: scroll;
-
-  padding-top: 5.5rem;
 }
 
 #wish-list-modal-content > h2 {
@@ -108,9 +105,6 @@ button {
 }
 
 #wish-list-modal-content .list-container {
-  /* display: flex;
-  justify-content: center;
-  align-items: center; */
   margin: 1.5rem 4rem 0 4rem;
 }
 
@@ -127,16 +121,15 @@ button {
 
 /* header */
 header .header-container {
-  background-color: var(--color-primary);
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 1.5rem var(--side-margin);
+  background-color: var(--color-primary);
   box-shadow: var(--shadow-medium);
 }
 
 header .header-container #logo {
-  /* width: 4rem; */
   height: 3rem;
 }
 
@@ -162,7 +155,7 @@ header .header-container .search-container #search-bar {
 header .header-container .search-container #search-btn {
   position: absolute;
   right: 1rem;
-  top: 0.9rem; /* (3rem - 1.2rem) / 2 */
+  top: 0.9rem;
   height: 1.2rem;
   width: 1.2rem;
 }
@@ -173,24 +166,17 @@ header .header-container .search-container #search-btn img {
 }
 
 header .header-container .like-btn {
-  /* height: 3rem; */
-  /* width: 3rem; */
-
   height: 2.5rem;
   width: 2.5rem;
 }
 
 /* main */
-
 main #search-keyword {
   margin-top: 3rem;
   margin-left: var(--side-margin);
 }
 
 main .list-container {
-  /* display: flex;
-  justify-content: center;
-  align-items: center; */
   margin: 1.5rem var(--side-margin) 0 var(--side-margin);
 }
 
@@ -206,15 +192,12 @@ main ul li {
 }
 
 .book-container {
-  border: 1.2px solid black;
-  border-radius: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  /* align-items: center; */
-  /* height: 30rem; */
   padding: 1rem;
-  /* box-shadow: var(--shadow-small); */
+  border: 1.2px solid black;
+  border-radius: 1rem;
 }
 
 .book-container-cover {
@@ -222,46 +205,32 @@ main ul li {
   display: flex;
   justify-content: center;
   align-items: center;
-  /* height: 100%; */
   width: 100%;
-  /* min-height: 100px;
-  max-height: 250px; */
-  overflow: hidden;
   height: 300px;
+  overflow: hidden;
   box-shadow: var(--shadow-small);
 }
 
 .book-container .book-cover {
   height: 300px;
-
-  /* width: 100%; */
-  /* max-height: 15rem; */
   object-fit: cover;
-  /* border-radius: 1rem; */
 }
 
 .book-description {
   position: absolute;
   top: 0;
   left: 0;
-  height: 100%;
   width: 100%;
+  height: 100%;
   padding: 1rem;
   background-color: #a7a7a7;
   color: white;
-  /* display: flex; */
-  /* align-items: center; */
-  /* justify-content: center; */
-  /* text-align: center; */
   opacity: 0;
   transition: opacity 0.3s ease;
-
   font-size: var(--font-medium);
-  /* line-height: var(--font-large); */
   overflow-x: visible;
   overflow: hidden;
   overflow-y: scroll;
-  /* overflow 처리 다시 고민해볼 것 */
   text-overflow: ellipsis;
 }
 
@@ -275,17 +244,12 @@ main ul li {
 
 .book-container .book-container-footer {
   position: relative;
-  /* display: flex; */
-  /* justify-content: space-between; */
-  /* align-items: center; */
   padding-top: 1rem;
   width: calc(100% - 1rem);
 }
 
 .book-container .book-container-footer p {
   margin-top: 0.5rem;
-  /* display: inline-block; */
-
   width: 100%;
   max-width: 100%;
   box-sizing: border-box;
@@ -318,15 +282,14 @@ main ul li {
 }
 
 .book-container .like-btn.active img {
-  content: url("../images/icons/like_button_filled.png");
+  content: var(--like-button-filled);
 }
 
 .book-container .like-btn:hover img {
-  content: url("../images/icons/like_button_filled.png");
+  content: var(--like-button-filled);
 }
 
 /* footer(pagination) */
-
 footer .pagination {
   display: flex;
   justify-content: center;
@@ -368,7 +331,6 @@ footer .pagination {
   header .header-container {
     flex-direction: column;
     align-items: center;
-    /* padding: 1rem var(--side-margin); */
   }
 
   header .header-container #logo {
@@ -387,7 +349,7 @@ footer .pagination {
 
   /* main */
   main .list-container {
-    margin: 1rem var(--side-margin);
+    margin: 1rem var(–side-margin);
   }
 
   main ul {
@@ -395,22 +357,17 @@ footer .pagination {
   }
 
   /* modal */
-  #wish-list-modal-container {
-    padding: 0;
-  }
-
   #wish-list-modal-content {
     width: 100%;
     height: 100%;
-    border-radius: 0;
     padding: 1rem;
+    border-radius: 0;
     box-shadow: none;
-    /* background-color: #b3b3b380;  */
   }
 
   #wish-list-modal-content > h2 {
     top: 2rem;
-    font-size: var(--font-medium);
+    font-size: var(–font-medium);
   }
 
   #modal-close-btn {
