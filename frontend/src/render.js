@@ -1,16 +1,16 @@
 import { handlePagination } from "./index.js";
 import {
-  saveToWishlist,
-  removeFromWishlist,
-  isBookInWishlist,
+  saveToStorage,
+  removeFromStorage,
+  isItemInStorage,
 } from "./storage.js";
 
 const toggleWishlist = (bookData, likeBtn) => {
-  if (isBookInWishlist(bookData)) {
-    removeFromWishlist(bookData);
+  if (isItemInStorage("wishList", bookData)) {
+    removeFromStorage("wishList", bookData);
     likeBtn.classList.remove("active");
   } else {
-    saveToWishlist(bookData);
+    saveToStorage("wishList", bookData);
     likeBtn.classList.add("active");
   }
 };
@@ -47,7 +47,7 @@ export const renderBook = (bookData) => {
   const likeBtnEl = liElement.querySelector(".like-btn");
   const bookContainerCoverEl = liElement.querySelector(".book-container-cover");
 
-  if (isBookInWishlist(bookData)) {
+  if (isItemInStorage("wishList", bookData)) {
     likeBtnEl.classList.add("active");
   }
 

@@ -1,20 +1,20 @@
-export const saveToWishlist = (bookData) => {
-  let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
-  wishlist.push(bookData);
-  localStorage.setItem("wishlist", JSON.stringify(wishlist));
+export const saveToStorage = (key, bookData) => {
+  let storage = JSON.parse(localStorage.getItem(key)) || [];
+  storage.push(bookData);
+  localStorage.setItem(key, JSON.stringify(storage));
 };
 
-export const removeFromWishlist = (bookData) => {
-  let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
-  wishlist = wishlist.filter((book) => book.itemId !== bookData.itemId);
-  localStorage.setItem("wishlist", JSON.stringify(wishlist));
+export const removeFromStorage = (key, itemData) => {
+  let storage = JSON.parse(localStorage.getItem(key)) || [];
+  storage = storage.filter((item) => item.itemId !== itemData.itemId);
+  localStorage.setItem(key, JSON.stringify(storage));
 };
 
-export const isBookInWishlist = (bookData) => {
-  let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
-  return wishlist.some((book) => book.itemId === bookData.itemId);
+export const isItemInStorage = (key, itemData) => {
+  let storage = JSON.parse(localStorage.getItem(key)) || [];
+  return storage.some((item) => item.itemId === itemData.itemId);
 };
 
-export const getWishlist = () => {
-  return JSON.parse(localStorage.getItem("wishlist")) || [];
+export const getStorage = (key) => {
+  return JSON.parse(localStorage.getItem(key)) || [];
 };

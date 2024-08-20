@@ -2,7 +2,7 @@
 // 전체 로직 설명하는 DOC 잘 작성할 것
 
 import { fetchItemList, fetchItemSearch } from "./api.js";
-import { getWishlist } from "./storage.js";
+import { getStorage } from "./storage.js";
 import {
   renderBook,
   renderPaginationNum,
@@ -40,7 +40,7 @@ let currentPageData;
 let searchKeyword = "";
 
 const displayBookList = () => {
-  let toRenderData = isModalOpen ? getWishlist() : currentPageData;
+  let toRenderData = isModalOpen ? getStorage("wishList") : currentPageData;
   const whereToRender = isModalOpen
     ? document.querySelector("#wish-list-modal-container .list-container ul")
     : document.querySelector("main .list-container ul");
