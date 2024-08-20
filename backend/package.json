@@ -1,8 +1,8 @@
 {
-  "name": "vanillajs_bookasearch",
+  "name": "vanillajs_api_practice",
   "version": "1.0.0",
   "main": "app.js",
-  "repository": "https://github.com/wilderif/VanillaJS_BookSearch",
+  "repository": "https://github.com/wilderif/VanillaJS_API_Practice",
   "author": "wilderif <woojuro3@gmail.com>",
   "license": "MIT",
   "devDependencies": {
