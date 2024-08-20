@@ -59,7 +59,7 @@ let searchKeyword = "";
 
 // 모달에 있는지 구분해서 구현
 const displayBookList = () => {
-  const bookListEl = document.querySelector(".list-container ul");
+  const bookListEl = document.querySelector("main .list-container ul");
   bookListEl.innerHTML = "";
   currentPageData.forEach((bookData) => {
     bookListEl.appendChild(renderBook(bookData));

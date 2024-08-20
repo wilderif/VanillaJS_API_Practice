@@ -74,19 +74,56 @@ button {
 }
 
 #wish-list-modal-content {
-  position: absolute;
+  position: relative;
   background-color: lightgreen;
   height: calc(100vh - 13rem);
   width: calc(100% - 2 * var(--side-margin));
   border-radius: 1rem;
   box-shadow: var(--shadow-large);
   overflow-y: scroll;
+
+  padding-top: 5.5rem;
+}
+
+#wish-list-modal-content > p {
+  position: absolute;
+  top: 3rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: var(--font-large);
+  font-weight: 500;
 }
 
 #modal-close-btn {
   position: absolute;
-  top: 1rem;
-  right: 1rem;
+  top: 2rem;
+  right: 2rem;
+  height: 2rem;
+  width: 2rem;
+}
+
+#modal-close-btn img {
+  height: 100%;
+  width: 100%;
+}
+
+#wish-list-modal-content .list-container {
+  /* display: flex;
+  justify-content: center;
+  align-items: center; */
+  margin: 1.5rem var(--side-margin) 0 var(--side-margin);
+}
+
+#wish-list-modal-content ul {
+  /* border: 1px solid orangered; */
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+#wish-list-modal-content ul li {
+  overflow-x: auto;
 }
 
 /* header */
