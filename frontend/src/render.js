@@ -1,6 +1,4 @@
-// storage에서 가져와서 parse한 뒤 render
-
-import { handlePagination, curSearchType } from "./index.js";
+import { handlePagination } from "./index.js";
 import {
   saveToWishlist,
   removeFromWishlist,
@@ -46,14 +44,19 @@ export const renderBook = (bookData) => {
     </div>
   `;
 
-  const likeBtn = liElement.querySelector(".like-btn");
+  const likeBtnEl = liElement.querySelector(".like-btn");
+  const bookContainerCoverEl = liElement.querySelector(".book-container-cover");
 
   if (isBookInWishlist(bookData)) {
-    likeBtn.classList.add("active");
+    likeBtnEl.classList.add("active");
   }
 
-  likeBtn.addEventListener("click", () => {
-    toggleWishlist(bookData, likeBtn);
+  likeBtnEl.addEventListener("click", () => {
+    toggleWishlist(bookData, likeBtnEl);
+  });
+
+  bookContainerCoverEl.addEventListener("click", () => {
+    window.open(bookData.link, "_blank"); // 새 탭에서 링크 열기
   });
 
   return liElement;
