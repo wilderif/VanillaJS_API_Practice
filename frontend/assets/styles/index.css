@@ -3,6 +3,7 @@
 
 :root {
   --color-primary: #eeeeee;
+  --color-secondary: #b3b3b3;
   --color-point: #ffc2c2;
 
   --font-extra-small: 0.8rem;
@@ -10,9 +11,9 @@
   --font-medium: 1rem;
   --font-large: 1.1rem;
 
-  --shadow-small: 0 3px 5px rgba(0, 0, 0, 0.15);
-  --shadow-medium: 0 5px 10px rgba(0, 0, 0, 0.15);
-  --shadow-large: 0 5px 20px rgba(0, 0, 0, 0.15);
+  --shadow-small: 0 3px 5px rgba(0, 0, 0, 0.2);
+  --shadow-medium: 0 5px 10px rgba(0, 0, 0, 0.2);
+  --shadow-large: 0 5px 20px rgba(0, 0, 0, 0.2);
 
   --side-margin: 8rem;
 
@@ -77,7 +78,7 @@ button {
 
 #wish-list-modal-content {
   position: relative;
-  background-color: lightgreen;
+  background-color: var(--color-primary);
   height: calc(100vh - 13rem);
   width: calc(100% - 2 * var(--side-margin));
   border-radius: 1rem;
@@ -218,6 +219,7 @@ main ul li {
   /* align-items: center; */
   /* height: 30rem; */
   padding: 1rem;
+  /* 그림자?? */
 }
 
 .book-container-cover {
