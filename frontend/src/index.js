@@ -272,4 +272,4 @@ document.addEventListener("keydown", (event) => {
 
 logoEl.addEventListener("click", init);
 
-// init();
+init();

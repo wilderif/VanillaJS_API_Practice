@@ -196,7 +196,8 @@ main ul li {
   flex-direction: column;
   justify-content: space-between;
   padding: 1rem;
-  border: 1.2px solid black;
+  border: 1.5px solid var(--color-secondary);
+  /* box-shadow: var(--shadow-small); */
   border-radius: 1rem;
 }
 
