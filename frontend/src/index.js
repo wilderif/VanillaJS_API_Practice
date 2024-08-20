@@ -233,4 +233,4 @@ const init = async () => {
   displayPagination(1, currentTotalPages);
 };
 
-// init();
+init();
