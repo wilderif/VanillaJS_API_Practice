@@ -19,7 +19,7 @@
 // import init from "./init.js";
 
 import { fetchItemList, fetchItemSearch } from "./api.js";
-import { saveToStorage } from "./storage.js";
+import { getWishlist } from "./storage.js";
 import {
   renderBook,
   renderPaginationNum,
@@ -45,9 +45,10 @@ const pageNextBtnEl = document.getElementById("page-next-btn");
 const pageNumbersEl = document.getElementById("page-numbers");
 
 // -1: fetchItemList
-// 0:fetchItemSearch(search keyword 사용한 검색)
-// 1: wish list 검색
+//  0: fetchItemSearch(search keyword 사용한 검색)
+//  1: wish list 검색 (isModalOpen으로 대체)
 export let curSearchType = -1;
+let isModalOpen = false;
 
 let currentPage = 1;
 let currentTotalResults;
@@ -57,24 +58,18 @@ let searchKeyword = "";
 
 // 모달에 있는지 구분해서 구현
 const displayBookList = () => {
-  const bookListEl =
-    curSearchType === 1
-      ? document.querySelector("#wish-list-modal-container .list-container ul")
-      : document.querySelector("main .list-container ul");
-  bookListEl.innerHTML = "";
-  currentPageData.forEach((bookData) => {
-    bookListEl.appendChild(renderBook(bookData));
+  let toRenderData = isModalOpen ? getWishlist() : currentPageData;
+  const whereToRender = isModalOpen
+    ? document.querySelector("#wish-list-modal-container .list-container ul")
+    : document.querySelector("main .list-container ul");
+
+  whereToRender.innerHTML = "";
+  toRenderData.forEach((bookData) => {
+    whereToRender.appendChild(renderBook(bookData));
   });
 };
 
 export const handlePagination = async (targetPage) => {
-  console.log(
-    "curSearchType",
-    curSearchType,
-    targetPage,
-    currentTotalResults,
-    currentTotalPages
-  );
   if (curSearchType === -1) {
     [currentTotalResults, currentPageData] = await fetchItemList(
       "ItemNewSpecial",
@@ -90,7 +85,6 @@ export const handlePagination = async (targetPage) => {
       8,
       "Book"
     );
-  } else if (curSearchType === 1) {
   }
 
   currentPage = targetPage;
@@ -181,6 +175,14 @@ const handleSubmit = async () => {
   displayPagination(1, currentTotalPages);
 };
 
+const handleCloseModal = () => {
+  wishListModalContainerEl.classList.remove("active");
+  document.body.style.overflow = ""; // 모달 닫힐 때 배경 스크롤 해제
+  isModalOpen = false;
+  displayBookList();
+  displayPagination(currentPage, currentTotalPages);
+};
+
 searchBarEl.addEventListener("keydown", (event) => {
   if (event.key === "Enter" && event.isComposing === false) {
     handleSubmit();
@@ -194,19 +196,16 @@ searchBtnEl.addEventListener("click", (event) => {
 wishListBtnEl.addEventListener("click", (event) => {
   wishListModalContainerEl.classList.add("active");
   document.body.style.overflow = "hidden"; // 모달 열릴 때 배경 스크롤 잠금
-  curSearchType = 1;
+  isModalOpen = true;
+  displayBookList();
 });
 
-modalCloseBtnEl.addEventListener("click", (event) => {
-  wishListModalContainerEl.classList.remove("active");
-  document.body.style.overflow = ""; // 모달 닫힐 때 배경 스크롤 해제
-});
+modalCloseBtnEl.addEventListener("click", handleCloseModal);
 
 // 외부 클릭으로 모달 닫기
 wishListModalContainerEl.addEventListener("click", (event) => {
   if (event.target === wishListModalContainerEl) {
-    wishListModalContainerEl.classList.remove("active");
-    document.body.style.overflow = "";
+    handleCloseModal();
   }
 });
 
@@ -216,8 +215,7 @@ document.addEventListener("keydown", (event) => {
     event.key === "Escape" &&
     wishListModalContainerEl.classList.contains("active")
   ) {
-    wishListModalContainerEl.classList.remove("active");
-    document.body.style.overflow = "";
+    handleCloseModal();
   }
 });
 

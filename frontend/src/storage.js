@@ -1,13 +1,3 @@
-// key 따라서 localStorage에 책 저장
-// ItemNewSpecial, Query
-export const saveToStorage = (key, books) => {
-  console.log(key, books);
-  // const data = JSON.stringify(books);
-  const toStore = {};
-
-  localStorage.setItem(key, JSON.stringify(toStore));
-};
-
 export const saveToWishlist = (bookData) => {
   let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
   wishlist.push(bookData);
