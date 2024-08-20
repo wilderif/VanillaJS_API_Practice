@@ -1,5 +1,3 @@
-// data.totalResults 활용할 것
-
 export const fetchItemSearch = async (
   query = "",
   queryType = "Title",

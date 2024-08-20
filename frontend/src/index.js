@@ -1,8 +1,6 @@
 // jsDoc 주석 추가
 // 전체 로직 설명하는 DOC 잘 작성할 것
 
-// import init from "./init.js";
-
 import { fetchItemList, fetchItemSearch } from "./api.js";
 import { getWishlist } from "./storage.js";
 import {
