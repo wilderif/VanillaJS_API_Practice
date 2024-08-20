@@ -15,6 +15,12 @@ const toggleWishlist = (bookData, likeBtn) => {
   }
 };
 
+/**
+ * renderBook()
+ * bookData를 받아, 책 정보를 담은 li element를 반환
+ * li element 내부 cover element에 알라딘 페이지로 이동하기 위한 click event 추가
+ * li element 내부 like button element에 wish list 관련 click event 추가
+ */
 export const renderBook = (bookData) => {
   const liElement = document.createElement("li");
   const formattedPrice = parseInt(bookData.priceStandard, 10).toLocaleString();
@@ -44,19 +50,17 @@ export const renderBook = (bookData) => {
     </div>
   `;
 
-  const likeBtnEl = liElement.querySelector(".like-btn");
   const bookContainerCoverEl = liElement.querySelector(".book-container-cover");
+  bookContainerCoverEl.addEventListener("click", () => {
+    window.open(bookData.link, "_blank"); // 새 탭에서 링크 열기
+  });
 
+  const likeBtnEl = liElement.querySelector(".like-btn");
   if (isItemInStorage("wishList", bookData)) {
     likeBtnEl.classList.add("active");
   }
-
   likeBtnEl.addEventListener("click", () => {
     toggleWishlist(bookData, likeBtnEl);
-  });
-
-  bookContainerCoverEl.addEventListener("click", () => {
-    window.open(bookData.link, "_blank"); // 새 탭에서 링크 열기
   });
 
   return liElement;
@@ -64,6 +68,11 @@ export const renderBook = (bookData) => {
 
 const pageNumbersEl = document.getElementById("page-numbers");
 
+/**
+ * renderPaginationNum()
+ * curPage와 pageNum을 받아, 해당 pagination 숫자를 생성
+ * pageNum이 curPage와 같으면, current-page class 추가
+ */
 export const renderPaginationNum = (curPage, pageNum) => {
   const pageEl = document.createElement("button");
   pageEl.innerText = pageNum;
@@ -75,6 +84,10 @@ export const renderPaginationNum = (curPage, pageNum) => {
   pageNumbersEl.appendChild(pageEl);
 };
 
+/**
+ * renderPaginationDots()
+ * pagination ...을 생성
+ */
 export const renderPaginationDots = () => {
   const dotEl = document.createElement("span");
   dotEl.innerText = "...";
