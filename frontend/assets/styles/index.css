@@ -87,7 +87,7 @@ button {
   padding-top: 5.5rem;
 }
 
-#wish-list-modal-content > p {
+#wish-list-modal-content > h2 {
   position: absolute;
   top: 3rem;
   left: 50%;
@@ -117,7 +117,6 @@ button {
 }
 
 #wish-list-modal-content ul {
-  /* border: 1px solid orangered; */
   width: 100%;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -198,7 +197,6 @@ main .list-container {
 }
 
 main ul {
-  /* border: 1px solid orangered; */
   width: 100%;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -332,7 +330,6 @@ main ul li {
 /* footer(pagination) */
 
 footer .pagination {
-  border: solid 1px purple;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -413,7 +410,7 @@ footer .pagination {
     /* background-color: #b3b3b380;  */
   }
 
-  #wish-list-modal-content > p {
+  #wish-list-modal-content > h2 {
     top: 2rem;
     font-size: var(--font-medium);
   }

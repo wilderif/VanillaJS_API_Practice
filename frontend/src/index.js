@@ -1,19 +1,7 @@
-// 초기 화면 최신 도서 목록
-// fetch 1번만 한 뒤에 반복해서 사용
-// 날짜 바뀌면 새로운 데이터로 갱신
-// 책 한권 당 data 1000byte 이하 이므로 5000권 저장 가능?
-// 책 data에서 필요한 부분만 추출해서 저장
-
-// 검색 시 쿼리
-// 검색 후 텍스트 변경
-// 하트 클릭 시 wishList에 추가 및 삭제
-// wishList에 추가된 도서는 localStorage에 저장
-// wishList 누르면 모달창으로 wishList 목록 확인 가능
 // 메인로고 클릭 시 초기 화면으로 이동
-// api 오류 예외처리
-// jsDoc 주석 추가
-// 검색어 없을 때 예외처리
+// 책 클릭 시 알라딘 도서 상세 페이지로 이동
 
+// jsDoc 주석 추가
 // 전체 로직 설명하는 DOC 잘 작성할 것
 
 // import init from "./init.js";
@@ -30,9 +18,9 @@ const wishListBtnEl = document.getElementById("wish-list-btn");
 const wishListModalContainerEl = document.getElementById(
   "wish-list-modal-container"
 );
-const wishListModalContentEl = document.getElementById(
-  "wish-list-modal-content"
-);
+
+const logoEl = document.getElementById("logo");
+
 const modalCloseBtnEl = document.getElementById("modal-close-btn");
 
 const searchKeywordEl = document.getElementById("search-keyword-text");
@@ -46,7 +34,7 @@ const pageNumbersEl = document.getElementById("page-numbers");
 
 // -1: fetchItemList
 //  0: fetchItemSearch(search keyword 사용한 검색)
-//  1: wish list 검색 (isModalOpen으로 대체)
+//  1: wish list 검색 (모달 닫았을 때 like 정보를 동기화하기 위하여, isModalOpen으로 대체)
 export let curSearchType = -1;
 let isModalOpen = false;
 
@@ -56,7 +44,6 @@ let currentTotalPages;
 let currentPageData;
 let searchKeyword = "";
 
-// 모달에 있는지 구분해서 구현
 const displayBookList = () => {
   let toRenderData = isModalOpen ? getWishlist() : currentPageData;
   const whereToRender = isModalOpen
@@ -153,9 +140,13 @@ const displayPagination = (curPage, totalPages) => {
 const handleSubmit = async () => {
   searchKeyword = searchBarEl.value.trim();
 
-  // 예외 범위 alert 변경할 것
   if (!searchKeyword) {
     alert("검색어를 입력해주세요.");
+    return;
+  }
+
+  if (searchKeyword.length > 25) {
+    alert("검색어는 25자 이내로 입력해주세요.");
     return;
   }
 
@@ -233,4 +224,6 @@ const init = async () => {
   displayPagination(1, currentTotalPages);
 };
 
-init();
+// init();
+
+logoEl.addEventListener("click", init);

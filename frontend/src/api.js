@@ -29,7 +29,7 @@ export const fetchItemSearch = async (
     return [totalResults, data.item];
   } catch (error) {
     console.error("API 요청 중 오류 발생:", error);
-    // document.getElementById("result").innerText = "오류 발생: " + error.message;
+    alert("API 요청 중 오류 발생, 잠시 후 다시 시도해주세요.");
   }
 };
 
@@ -60,6 +60,6 @@ export const fetchItemList = async (
     return [totalResults, data.item];
   } catch (error) {
     console.error("API 요청 중 오류 발생:", error);
-    // document.getElementById("result").innerText = "오류 발생: " + error.message;
+    alert("API 요청 중 오류 발생, 잠시 후 다시 시도해주세요.");
   }
 };
