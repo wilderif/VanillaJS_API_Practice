@@ -14,8 +14,6 @@
 // jsDoc 주석 추가
 // 검색어 없을 때 예외처리
 
-// localStorage의 index에 따라 pagination 생성
-
 // 전체 로직 설명하는 DOC 잘 작성할 것
 
 // import init from "./init.js";
@@ -59,7 +57,10 @@ let searchKeyword = "";
 
 // 모달에 있는지 구분해서 구현
 const displayBookList = () => {
-  const bookListEl = document.querySelector("main .list-container ul");
+  const bookListEl =
+    curSearchType === 1
+      ? document.querySelector("#wish-list-modal-container .list-container ul")
+      : document.querySelector("main .list-container ul");
   bookListEl.innerHTML = "";
   currentPageData.forEach((bookData) => {
     bookListEl.appendChild(renderBook(bookData));
@@ -193,6 +194,7 @@ searchBtnEl.addEventListener("click", (event) => {
 wishListBtnEl.addEventListener("click", (event) => {
   wishListModalContainerEl.classList.add("active");
   document.body.style.overflow = "hidden"; // 모달 열릴 때 배경 스크롤 잠금
+  curSearchType = 1;
 });
 
 modalCloseBtnEl.addEventListener("click", (event) => {

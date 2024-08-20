@@ -16,6 +16,8 @@
 
   --side-margin: 8rem;
 
+  --like-button-filled: url("../images/icons/like_button_filled.png");
+
   font-size: 16px;
 }
 
@@ -315,6 +317,14 @@ main ul li {
   bottom: 1.5rem;
   height: 1rem;
   width: 1rem;
+}
+
+.book-container .like-btn.active img {
+  content: url("../images/icons/like_button_filled.png");
+}
+
+.book-container .like-btn:hover img {
+  content: url("../images/icons/like_button_filled.png");
 }
 
 /* footer(pagination) */

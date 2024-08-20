@@ -3,14 +3,28 @@
 export const saveToStorage = (key, books) => {
   console.log(key, books);
   // const data = JSON.stringify(books);
-  const pageSize = 8;
-  const totalPages = Math.ceil(books.length / pageSize);
   const toStore = {};
 
-  for (let i = 0; i < totalPages; i++) {
-    const pageData = books.slice(i * pageSize, (i + 1) * pageSize);
-    toStore[i + 1] = pageData;
-  }
-  console.log(toStore);
   localStorage.setItem(key, JSON.stringify(toStore));
+};
+
+export const saveToWishlist = (bookData) => {
+  let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+  wishlist.push(bookData);
+  localStorage.setItem("wishlist", JSON.stringify(wishlist));
+};
+
+export const removeFromWishlist = (bookData) => {
+  let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+  wishlist = wishlist.filter((book) => book.itemId !== bookData.itemId);
+  localStorage.setItem("wishlist", JSON.stringify(wishlist));
+};
+
+export const isBookInWishlist = (bookData) => {
+  let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+  return wishlist.some((book) => book.itemId === bookData.itemId);
+};
+
+export const getWishlist = () => {
+  return JSON.parse(localStorage.getItem("wishlist")) || [];
 };

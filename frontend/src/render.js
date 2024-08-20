@@ -1,6 +1,21 @@
 // storage에서 가져와서 parse한 뒤 render
 
 import { handlePagination, curSearchType } from "./index.js";
+import {
+  saveToWishlist,
+  removeFromWishlist,
+  isBookInWishlist,
+} from "./storage.js";
+
+const toggleWishlist = (bookData, likeBtn) => {
+  if (isBookInWishlist(bookData)) {
+    removeFromWishlist(bookData);
+    likeBtn.classList.remove("active");
+  } else {
+    saveToWishlist(bookData);
+    likeBtn.classList.add("active");
+  }
+};
 
 export const renderBook = (bookData) => {
   const liElement = document.createElement("li");
@@ -30,6 +45,16 @@ export const renderBook = (bookData) => {
       </div>
     </div>
   `;
+
+  const likeBtn = liElement.querySelector(".like-btn");
+
+  if (isBookInWishlist(bookData)) {
+    likeBtn.classList.add("active");
+  }
+
+  likeBtn.addEventListener("click", () => {
+    toggleWishlist(bookData, likeBtn);
+  });
 
   return liElement;
 };
