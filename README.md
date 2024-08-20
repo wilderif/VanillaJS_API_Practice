@@ -46,36 +46,36 @@ BookBook은 사용자들이 관심 있는 책을 검색하고, 위시리스트�
 
 ## 실행
 
-1. **API 키 발급**
-   https://www.aladin.co.kr/ttb/wblog_manage.aspx 에 접속하여 **알라딘 Open API** 키를 발급받습니다.
+1.  **API 키 발급**
+    https://www.aladin.co.kr/ttb/wblog_manage.aspx 에 접속하여 **알라딘 Open API** 키를 발급받습니다.
 
-2. **API 키 저장**
+2.  **API 키 저장**
 
-   1. 프로젝트의 `backend` 디렉토리로 이동한 후, `.env` 파일을 생성합니다.
+    1. 프로젝트의 `backend` 디렉토리로 이동한 후, `.env` 파일을 생성합니다.
 
-   2. `.env` 파일에 아래와 같이 발급받은 API 키를 저장합니다:
+    2. `.env` 파일에 아래와 같이 발급받은 API 키를 저장합니다:
 
-   ```
-   API_KEY=발급받은_API_키
-   ```
+    ```
+    API_KEY=발급받은_API_키
+    ```
 
-3. **Backend 서버 실행**
-   필요한 패키지를 설치하고, 서버를 실행합니다.
+3.  **Backend 서버 실행**
+    필요한 패키지를 설치하고, 서버를 실행합니다.
 
-   **npm**
+    **npm**
 
-   ```bash
-   npm install
-   npm start
-   ```
+    ```bash
+    npm install
+    npm start
+    ```
 
-   **yarn**
+    **yarn**
 
-   ```bash
-   yarn install
-   yarn start
-   ```
+    ```bash
+    yarn install
+    yarn start
+    ```
 
-4. **Frontend 애플리케이션 실행**
-   - `frontend` 디렉토리의 `index.html` 파일을 브라우저에서 열어 BookBook 애플리케이션을 실행합니다.
-   - 서버가 정상적으로 동작 중이라면, API 호출을 통해 **주목할 만한 신간 리스트** 정보가 화면에 표시되며, 검색, 위시리스트 등의 기능을 사용할 수 있습니다.
+4.  **Frontend 애플리케이션 실행**
+    - `frontend` 디렉토리의 `index.html` 파일을 브라우저에서 열어 BookBook 애플리케이션을 실행합니다.
+    - 서버가 정상적으로 동작 중이라면, API 호출을 통해 **주목할 만한 신간 리스트** 정보가 화면에 표시되며, 검색, 위시리스트 등의 기능을 사용할 수 있습니다.
