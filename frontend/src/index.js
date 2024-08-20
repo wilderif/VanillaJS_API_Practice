@@ -28,7 +28,15 @@ import {
   renderPaginationDots,
 } from "./render.js";
 
-const wishListEl = document.getElementById("wish-list");
+const wishListBtnEl = document.getElementById("wish-list-btn");
+const wishListModalContainerEl = document.getElementById(
+  "wish-list-modal-container"
+);
+const wishListModalContentEl = document.getElementById(
+  "wish-list-modal-content"
+);
+const modalCloseBtnEl = document.getElementById("modal-close-btn");
+
 const searchKeywordEl = document.getElementById("search-keyword-text");
 
 const searchBarEl = document.getElementById("search-bar");
@@ -180,6 +188,35 @@ searchBarEl.addEventListener("keydown", (event) => {
 
 searchBtnEl.addEventListener("click", (event) => {
   handleSubmit();
+});
+
+wishListBtnEl.addEventListener("click", (event) => {
+  wishListModalContainerEl.classList.add("active");
+  document.body.style.overflow = "hidden"; // 모달 열릴 때 배경 스크롤 잠금
+});
+
+modalCloseBtnEl.addEventListener("click", (event) => {
+  wishListModalContainerEl.classList.remove("active");
+  document.body.style.overflow = ""; // 모달 닫힐 때 배경 스크롤 해제
+});
+
+// 외부 클릭으로 모달 닫기
+wishListModalContainerEl.addEventListener("click", (event) => {
+  if (event.target === wishListModalContainerEl) {
+    wishListModalContainerEl.classList.remove("active");
+    document.body.style.overflow = "";
+  }
+});
+
+// ESC 키로 모달 닫기
+document.addEventListener("keydown", (event) => {
+  if (
+    event.key === "Escape" &&
+    wishListModalContainerEl.classList.contains("active")
+  ) {
+    wishListModalContainerEl.classList.remove("active");
+    document.body.style.overflow = "";
+  }
 });
 
 const init = async () => {

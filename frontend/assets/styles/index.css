@@ -12,7 +12,7 @@
 
   --shadow-small: 0 3px 5px rgba(0, 0, 0, 0.15);
   --shadow-medium: 0 5px 10px rgba(0, 0, 0, 0.15);
-  /* --shadow-large: 0 5px 20px rgba(0, 0, 0, 0.15); */
+  --shadow-large: 0 5px 20px rgba(0, 0, 0, 0.15);
 
   --side-margin: 8rem;
 
@@ -62,14 +62,31 @@ button {
   display: flex;
   justify-content: center;
   align-items: center;
+
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+#wish-list-modal-container.active {
+  opacity: 1;
+  visibility: visible;
 }
 
 #wish-list-modal-content {
+  position: absolute;
   background-color: lightgreen;
   height: calc(100vh - 13rem);
-
   width: calc(100% - 2 * var(--side-margin));
   border-radius: 1rem;
+  box-shadow: var(--shadow-large);
+  overflow-y: scroll;
+}
+
+#modal-close-btn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
 }
 
 /* header */
